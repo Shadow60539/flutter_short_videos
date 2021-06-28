@@ -1,19 +1,19 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_short_videos/screens/like_icon.dart';
+import 'package:flutter_short_videos/screens/widgets/like_icon.dart';
 import 'package:flutter_short_videos/screens/options_screen.dart';
 import 'package:video_player/video_player.dart';
 
-class ContentScreen extends StatefulWidget {
+class ContentWidget extends StatefulWidget {
   final String src;
 
-  const ContentScreen({Key key, this.src}) : super(key: key);
+  const ContentWidget({Key key, this.src}) : super(key: key);
 
   @override
-  _ContentScreenState createState() => _ContentScreenState();
+  _ContentWidgetState createState() => _ContentWidgetState();
 }
 
-class _ContentScreenState extends State<ContentScreen> {
+class _ContentWidgetState extends State<ContentWidget> {
   VideoPlayerController _videoPlayerController;
   ChewieController _chewieController;
   bool _liked = false;

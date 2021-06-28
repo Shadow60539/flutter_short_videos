@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_short_videos/screens/content_screen.dart';
+import 'package:flutter_short_videos/screens/widgets/content_widget.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 class HomePage extends StatelessWidget {
@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
               //We need swiper for every content
               Swiper(
                 itemBuilder: (BuildContext context, int index) {
-                  return ContentScreen(
+                  return ContentWidget(
                     src: videos[index],
                   );
                 },
