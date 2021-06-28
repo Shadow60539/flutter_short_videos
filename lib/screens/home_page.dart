@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Flutter Shorts',
+                      'Flutter Short Videos',
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.w600,
