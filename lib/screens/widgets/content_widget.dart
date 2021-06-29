@@ -1,7 +1,7 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_short_videos/screens/widgets/like_icon.dart';
 import 'package:flutter_short_videos/screens/options_screen.dart';
+import 'package:flutter_short_videos/screens/widgets/like_icon.dart';
 import 'package:video_player/video_player.dart';
 
 class ContentWidget extends StatefulWidget {
@@ -25,13 +25,15 @@ class _ContentWidgetState extends State<ContentWidget> {
   }
 
   Future initializePlayer() async {
-    _videoPlayerController = VideoPlayerController.network(widget.src);
+    _videoPlayerController =
+        VideoPlayerController.network(widget.src, formatHint: VideoFormat.hls);
     await Future.wait([_videoPlayerController.initialize()]);
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController,
       autoPlay: true,
       showControls: false,
       looping: true,
+      aspectRatio: 9 / 16,
     );
     setState(() {});
   }
@@ -48,30 +50,23 @@ class _ContentWidgetState extends State<ContentWidget> {
     return Stack(
       fit: StackFit.expand,
       children: [
-        _chewieController != null &&
-                _chewieController.videoPlayerController.value.isInitialized
-            ? GestureDetector(
-                onDoubleTap: () {
-                  setState(() {
-                    _liked = !_liked;
-                  });
-                },
-                child: Chewie(
-                  controller: _chewieController,
-                ),
-              )
-            : Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                        Colors.white.withOpacity(0.5)),
-                    strokeWidth: 2,
-                  ),
-                  //SizedBox(height: 10),
-                  //Text('Loading...')
-                ],
+        if (_chewieController != null &&
+            _chewieController.videoPlayerController.value.isInitialized)
+          GestureDetector(
+            onDoubleTap: () {
+              setState(() {
+                _liked = !_liked;
+              });
+            },
+            child: FittedBox(
+              fit: BoxFit.fitWidth,
+              child: Chewie(
+                controller: _chewieController,
               ),
+            ),
+          )
+        else
+          const SizedBox.shrink(),
         if (_liked)
           Center(
             child: LikeIcon(),
